@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Homely - Smart Kitchen Assistant</title>
+  <!-- Add standard fonts and icons for the SPA entry shell -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class", // 'media' or 'class'
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#d57f30",
+            "primary-dark": "#b06624",
+            "primary-content": "#ffffff",
+            "primary-light": "#fdf3eb",
+            "secondary": "#8D5A2B",
+            "accent": "#d47e30",
+            "neutral": "#825e34",
+            "neutral-light": "#a68b6c",
+            "background-cream": "#fdfbd4",
+            "background-light": "#f8f7f6",
+            "background-dark": "#1e1914",
+            "surface": "#ffffff",
+            "surface-light": "#ffffff",
+            "surface-dark": "#2d241a",
+            "wood-tone": "#825E34",
+            "homely-bg": "#FDFBD4",
+            "homely-primary": "#8D5A2B",
+            "homely-text": "#4A3B32",
+            "homely-secondary": "#825E34",
+            "homely-card": "#FFFFFF",
+            "cream": "#FDFBD4",
+            "brown-dark": "#8D5A2B",
+            "brown-text": "#825E34",
+            "text-main": "#3A2A1A",
+            "text-secondary": "#6B5A4B",
+            "fab-color": "#8D5A2B",
+            "warm-bg": "#F5EFE6",
+            "deep-brown": "#5C3A21",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          borderRadius: { "DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "2xl": "2.5rem", "3xl": "3rem", "full": "9999px" },
+          boxShadow: {
+            "soft": "0 10px 40px -10px rgba(141, 90, 43, 0.2)",
+            "card": "0 2px 8px -2px rgba(130, 94, 52, 0.1)"
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body,
+    html {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar,
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar,
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Custom Checkbox */
+    .custom-checkbox:checked {
+      background-color: #D47E30;
+      border-color: #D47E30;
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+    }
+  </style>
+</head>
+
+<body
+  class="bg-background-light dark:bg-background-dark text-neutral dark:text-gray-100 antialiased selection:bg-primary/20">
+  <div id="app" class="w-full flex justify-center min-h-screen">
+    <!-- Routing happens here -->
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
