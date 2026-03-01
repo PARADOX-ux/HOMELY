@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Pantry Management - Homely</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c5a2b",
+                        "wood-tone": "#825E34",
+                        "turmeric": "#D47E30",
+                        "cream-bg": "#FDFBD4",
+                        "background-light": "#FDFBD4",
+                        "background-dark": "#1e1914",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "2xl": "2.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-[#191410] dark:text-[#f1ede9] antialiased overflow-hidden w-full h-full min-h-screen relative flex flex-col">
+    <!-- Header Section -->
+    <header class="px-6 pt-12 pb-4 flex flex-col gap-4 bg-background-light dark:bg-background-dark sticky top-0 z-20">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl font-bold text-[#4A3B2C] dark:text-[#e0d8cf] tracking-tight">Your Pantry</h1>
+                <p class="text-sm font-medium text-[#8b725b] mt-1">42 items in stock</p>
+            </div>
+            <button
+                class="flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-[#2c241b] shadow-sm text-[#4A3B2C] dark:text-[#e0d8cf]"
+                data-target="settings.html">
+                <span class="material-symbols-outlined">settings</span>
+            </button>
+        </div>
+        <!-- Search Bar -->
+        <div class="relative w-full">
+            <span class="absolute inset-y-0 left-4 flex items-center text-[#8b725b]">
+                <span class="material-symbols-outlined">search</span>
+            </span>
+            <input
+                class="w-full py-3.5 pl-12 pr-4 rounded-xl bg-white dark:bg-[#2c241b] border-none text-[#4A3B2C] dark:text-[#e0d8cf] placeholder-[#8b725b] shadow-sm focus:ring-2 focus:ring-primary focus:outline-none text-base"
+                placeholder="Search ingredients..." type="text" />
+        </div>
+    </header>
+    <!-- Main Content: Scrollable Area -->
+    <main class="flex-1 overflow-y-auto pb-32 hide-scrollbar px-6">
+        <!-- Filter Chips -->
+        <div class="flex gap-3 overflow-x-auto pb-6 hide-scrollbar -mx-6 px-6">
+            <button
+                class="filter-chip active-filter whitespace-nowrap px-5 py-2.5 rounded-full bg-primary text-white font-medium text-sm shadow-md shadow-primary/20">All
+                Items</button>
+            <button
+                class="filter-chip inactive-filter whitespace-nowrap px-5 py-2.5 rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] dark:text-[#e0d8cf] font-medium text-sm border border-[#E8E1D9] dark:border-transparent">Expiring
+                Soon</button>
+            <button
+                class="filter-chip inactive-filter whitespace-nowrap px-5 py-2.5 rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] dark:text-[#e0d8cf] font-medium text-sm border border-[#E8E1D9] dark:border-transparent">Low
+                Stock</button>
+            <button
+                class="filter-chip inactive-filter whitespace-nowrap px-5 py-2.5 rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] dark:text-[#e0d8cf] font-medium text-sm border border-[#E8E1D9] dark:border-transparent">Favorites</button>
+        </div>
+        <!-- Category: Vegetables -->
+        <section class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-wood-tone dark:text-[#ba9b7a]">Vegetables</h2>
+                <button class="text-sm font-semibold text-primary">View All</button>
+            </div>
+            <div class="space-y-3">
+                <div
+                    class="flex items-center p-3 bg-white dark:bg-[#2c241b] rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+                    <div
+                        class="h-16 w-16 rounded-xl bg-[#F4F1EE] dark:bg-[#3a3228] flex items-center justify-center shrink-0 overflow-hidden relative">
+                        <img alt="Fresh orange carrots" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRB0kIFBpfHPh0ZfUzb3_RlujpfGcv_KeP23_rzJ4XXVdCVLynv83YQWdUhogWU1DzjmpRI8vgkqRLyGhEwvZDB6CMJFxkyquTnNIsrkUIdO5znJRC5fVx01kkEntNohbQ8pHyyRtZeZefXmYcPWVNKvjSs0gWNH2YO-rqt4lLiTP6uLroPoZ1i6ghthtNH4664j6E64_8-otyGT0sgdR1PWGmwnwEPZlDhLETjD6DqAvQo8mzrTV4eUQmOErzE1K1OmhCAVspjHo" />
+                    </div>
+                    <div class="ml-4 flex-1 min-w-0">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-[#4A3B2C] dark:text-[#e0d8cf] text-lg leading-tight truncate">
+                                    Carrots</h3>
+                                <p class="text-xs font-medium text-turmeric mt-1 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">warning</span> Expiring soon
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-[#F9F7F5] dark:bg-[#1e1914] rounded-full p-1 ml-2">
+                        <button
+                            class="qty-minus w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm hover:text-primary transition-colors"><span
+                                class="material-symbols-outlined text-[16px]">remove</span></button>
+                        <span class="qty-val font-bold text-[#4A3B2C] dark:text-[#e0d8cf] w-4 text-center">3</span>
+                        <button
+                            class="qty-plus w-7 h-7 flex items-center justify-center rounded-full bg-primary text-white shadow-sm hover:bg-[#7a4e25] transition-colors"><span
+                                class="material-symbols-outlined text-[16px]">add</span></button>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div
+                    class="flex items-center p-3 bg-white dark:bg-[#2c241b] rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] opacity-90">
+                    <div
+                        class="h-16 w-16 rounded-xl bg-[#F4F1EE] dark:bg-[#3a3228] flex items-center justify-center shrink-0 overflow-hidden relative">
+                        <img alt="Whole red onions" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWoO7EUnmA5Fi5TtdOuBRdZ_Ztrlx5BdJkruZHsYT2C7N7yhL3xUA-XcMp7juNsUpQO32-y0Sc6nda8zk7PkOPffc69FrZxMBjrESCCNegc6hdpRINoQ18H7kzhYT5MW-URxywSttW8u8r-1A_7GLXJaeMVGHGxMM4ZotVnkjvLmIDsGfir8AIy9D4zYjVVYJYuZvN_k7I9LzemfX2eboEJNkh-rbO45p9M1dscSJBxoTobT8fp78Tu7FeMTDCurztASMgyrfPCsM" />
+                    </div>
+                    <div class="ml-4 flex-1 min-w-0">
+                        <h3 class="font-bold text-[#4A3B2C] dark:text-[#e0d8cf] text-lg leading-tight truncate">Red
+                            Onions</h3>
+                        <p class="text-xs text-[#8b725b] mt-1">Bought 5 days ago</p>
+                    </div>
+                    <div class="flex items-center gap-3 bg-[#F9F7F5] dark:bg-[#1e1914] rounded-full p-1 ml-2">
+                        <button
+                            class="qty-minus w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm hover:text-primary transition-colors"><span
+                                class="material-symbols-outlined text-[16px]">remove</span></button>
+                        <span class="qty-val font-bold text-[#4A3B2C] dark:text-[#e0d8cf] w-4 text-center">5</span>
+                        <button
+                            class="qty-plus w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm hover:text-primary transition-colors"><span
+                                class="material-symbols-outlined text-[16px]">add</span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Category: Dairy & Eggs -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold text-wood-tone dark:text-[#ba9b7a] mb-4">Dairy &amp; Eggs</h2>
+            <div class="space-y-3">
+                <div
+                    class="flex items-center p-3 bg-white dark:bg-[#2c241b] rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] ring-1 ring-turmeric/30">
+                    <div
+                        class="h-16 w-16 rounded-xl bg-[#F4F1EE] dark:bg-[#3a3228] flex items-center justify-center shrink-0 overflow-hidden relative">
+                        <img alt="Glass bottle of milk" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR6cdBFwwrRrOKtHQb5Sjbs_VFaOwE1zRmCqXNKGmqFiZrhkOd6q_p8MFdeQokZpzT9wr8nymyS5unyiwQeOrWhtYgq8GDtRKcYyFrocjIs7BGWep2rY34g3zxW1hAAkVzBVGmnUohSGHlV4ZqMMdLS1vsNkWapkrzeoldVKSz-J8m_TEmtPu7nNiHru4OZ4dVOWARDh-4U6cco9QTukfgMUuSvygHVsUqiPN_cWw-wsyoXFd5Fmt_t3lhSzeDZw_KWO9e4RjFA5o" />
+                    </div>
+                    <div class="ml-4 flex-1 min-w-0">
+                        <div class="flex flex-col">
+                            <h3 class="font-bold text-[#4A3B2C] dark:text-[#e0d8cf] text-lg leading-tight truncate">
+                                Whole Milk</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span
+                                    class="px-2 py-0.5 rounded-md bg-turmeric/10 text-turmeric text-[10px] font-bold uppercase tracking-wide">Low
+                                    Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-[#F9F7F5] dark:bg-[#1e1914] rounded-full p-1 ml-2">
+                        <button
+                            class="qty-minus w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm hover:text-primary transition-colors"><span
+                                class="material-symbols-outlined text-[16px]">remove</span></button>
+                        <span class="qty-val font-bold text-turmeric w-4 text-center">1</span>
+                        <button
+                            class="qty-plus w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm hover:text-primary transition-colors"><span
+                                class="material-symbols-outlined text-[16px]">add</span></button>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div
+                    class="flex items-center p-3 bg-white dark:bg-[#2c241b] rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+                    <div
+                        class="h-16 w-16 rounded-xl bg-[#F4F1EE] dark:bg-[#3a3228] flex items-center justify-center shrink-0 overflow-hidden relative">
+                        <img alt="Block of cheddar cheese" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDfkM4CIysaJypHKRIs2YB_pnwlbkB4ap2rsqTHTrA49G8sdOkfQ_7QAYEFBhIoZFJIu_YBS_6nu5y-dbR5ni1Rb6Fqj4fqal_3ZQ34QXsLphwHV_h8tV97ux2P5IkLfo0fQ0nUo3nWZH3hPMavS2bYr6XO8JGTngcj6gAIVNzjrmL6wNsmIXT4vaUn-qOM6_57GPfHkdnlQLyau_nkWzDHjYH3yNAMMVeNNpYTjyox0o-y_1JL4YUc0N_8pEz6dVfUDR7Ne3Hp9g" />
+                    </div>
+                    <div class="ml-4 flex-1 min-w-0">
+                        <h3 class="font-bold text-[#4A3B2C] dark:text-[#e0d8cf] text-lg leading-tight truncate">Cheddar
+                            Cheese</h3>
+                        <p class="text-xs text-[#8b725b] mt-1">Good for 2 weeks</p>
+                    </div>
+                    <div class="flex items-center gap-3 bg-[#F9F7F5] dark:bg-[#1e1914] rounded-full p-1 ml-2">
+                        <button
+                            class="qty-minus w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm hover:text-primary transition-colors"><span
+                                class="material-symbols-outlined text-[16px]">remove</span></button>
+                        <span class="qty-val font-bold text-[#4A3B2C] dark:text-[#e0d8cf] w-4 text-center">1</span>
+                        <button
+                            class="qty-plus w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm hover:text-primary transition-colors"><span
+                                class="material-symbols-outlined text-[16px]">add</span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Category: Spices -->
+        <section class="mb-24">
+            <h2 class="text-xl font-bold text-wood-tone dark:text-[#ba9b7a] mb-4">Spices</h2>
+            <div class="grid grid-cols-2 gap-3">
+                <div
+                    class="p-3 bg-white dark:bg-[#2c241b] rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex flex-col items-center text-center">
+                    <div
+                        class="h-14 w-14 mb-2 rounded-full bg-[#FFF8F0] dark:bg-[#3a3228] flex items-center justify-center shrink-0 text-primary">
+                        <span class="material-symbols-outlined text-3xl">grain</span>
+                    </div>
+                    <h3 class="font-bold text-[#4A3B2C] dark:text-[#e0d8cf] text-base">Cumin</h3>
+                    <p class="text-xs text-[#8b725b] mb-3">High Stock</p>
+                    <div
+                        class="flex items-center gap-3 bg-[#F9F7F5] dark:bg-[#1e1914] rounded-full p-1 w-full justify-between">
+                        <button
+                            class="qty-minus w-6 h-6 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm"><span
+                                class="material-symbols-outlined text-[14px]">remove</span></button>
+                        <span class="qty-val font-bold text-[#4A3B2C] dark:text-[#e0d8cf] text-sm">1</span>
+                        <button
+                            class="qty-plus w-6 h-6 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm"><span
+                                class="material-symbols-outlined text-[14px]">add</span></button>
+                    </div>
+                </div>
+                <div
+                    class="p-3 bg-white dark:bg-[#2c241b] rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex flex-col items-center text-center ring-1 ring-turmeric/30">
+                    <div
+                        class="h-14 w-14 mb-2 rounded-full bg-[#FFF8F0] dark:bg-[#3a3228] flex items-center justify-center shrink-0 text-turmeric">
+                        <span class="material-symbols-outlined text-3xl">local_fire_department</span>
+                    </div>
+                    <h3 class="font-bold text-[#4A3B2C] dark:text-[#e0d8cf] text-base">Paprika</h3>
+                    <p class="text-xs text-turmeric font-medium mb-3">Low Stock</p>
+                    <div
+                        class="flex items-center gap-3 bg-[#F9F7F5] dark:bg-[#1e1914] rounded-full p-1 w-full justify-between">
+                        <button
+                            class="qty-minus w-6 h-6 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm"><span
+                                class="material-symbols-outlined text-[14px]">remove</span></button>
+                        <span class="qty-val font-bold text-turmeric text-sm">0</span>
+                        <button
+                            class="qty-plus w-6 h-6 flex items-center justify-center rounded-full bg-primary text-white shadow-sm"><span
+                                class="material-symbols-outlined text-[14px]">add</span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Floating Actions Container -->
+    <div class="absolute bottom-24 left-0 right-0 px-6 flex justify-center z-10 pointer-events-none">
+        <div
+            class="flex gap-4 pointer-events-auto shadow-xl shadow-primary/20 rounded-full p-1.5 bg-white/90 dark:bg-[#2c241b]/90 backdrop-blur-md border border-[#F4F1EE] dark:border-transparent">
+            <button
+                class="flex items-center gap-2 px-6 py-3 bg-[#F4F1EE] dark:bg-[#3a3228] hover:bg-[#ebe6e0] text-primary rounded-full transition-colors font-bold text-sm"
+                data-target="ingredient_selection.html">
+                <span class="material-symbols-outlined">add</span> Add Item
+            </button>
+            <button
+                class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-[#7a4e25] text-white rounded-full transition-colors font-bold text-sm">
+                <span class="material-symbols-outlined">qr_code_scanner</span> Scan Receipt
+            </button>
+        </div>
+    </div>
+    <!-- Bottom Navigation placeholder -->
+    <div id="bottom-nav"></div>
+
+    <script>
+            (async function () {
+                let pendingAdditions = JSON.parse(localStorage.getItem('homely_pantry_additions') || '[]');
+
+                // If logged in, fetch authoritative list from Firebase
+                if (window.homelyAuth && window.homelyAuth.currentUser && window.homelyFirestore) {
+                    try {
+                        const { collection, getDocs } = window.homelyFirestore;
+                        const db = window.homelyDb;
+                        const uid = window.homelyAuth.currentUser.uid;
+                        const pantryQuery = await getDocs(collection(db, 'users', uid, 'pantry'));
+
+                        const firebaseItems = [];
+                        pantryQuery.forEach(doc => {
+                            const data = doc.data();
+                            if (data.name) firebaseItems.push(data.name);
+                        });
+
+                        // Merge firebase items with any lingering local items
+                        pendingAdditions = [...new Set([...pendingAdditions, ...firebaseItems])];
+                    } catch (err) {
+                        console.error("Error fetching pantry from Firebase:", err);
+                    }
+                }
+
+                if (pendingAdditions.length > 0) {
+                    // Find the sections container
+                    const vegSectionTitles = Array.from(document.querySelectorAll('h2')).filter(h2 => h2.textContent.includes('Vegetables'));
+                    let targetContainer = null;
+
+                    if (vegSectionTitles.length > 0) {
+                        targetContainer = vegSectionTitles[0].closest('section').querySelector('.space-y-3');
+                    } else {
+                        // Fallback: just grab the first .space-y-3 we can find
+                        targetContainer = document.querySelector('.space-y-3');
+                    }
+
+                    if (targetContainer) {
+                        // Gather all existing item titles dynamically to avoid dupes
+                        const existingTitles = Array.from(document.querySelectorAll('h3')).map(h3 => h3.textContent.trim().toLowerCase());
+
+                        pendingAdditions.forEach(itemName => {
+                            if (existingTitles.includes(itemName.toLowerCase())) return; // skip if already in UI
+
+                            const html = `
+                            <div class="flex items-center p-3 bg-white dark:bg-[#2c241b] rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] ring-1 ring-primary/20 transition-all zoom-in">
+                                <div class="h-16 w-16 rounded-xl bg-primary/10 flex flex-col items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary text-2xl">eco</span>
+                                </div>
+                                <div class="ml-4 flex-1 min-w-0">
+                                    <div class="flex flex-col">
+                                        <h3 class="font-bold text-[#4A3B2C] dark:text-[#e0d8cf] text-lg leading-tight truncate">${itemName}</h3>
+                                        <p class="text-xs text-[#8b725b] mt-1 font-medium flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-[12px] text-green-500">add_circle</span> Just Added
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 bg-[#F9F7F5] dark:bg-[#1e1914] rounded-full p-1 ml-2">
+                                    <button class="qty-minus w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]">remove</span></button>
+                                    <span class="qty-val font-bold text-[#4A3B2C] dark:text-[#e0d8cf] w-4 text-center">1</span>
+                                    <button class="qty-plus w-7 h-7 flex items-center justify-center rounded-full bg-white dark:bg-[#2c241b] text-[#4A3B2C] shadow-sm hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]">add</span></button>
+                                </div>
+                            </div>
+                            `;
+                            targetContainer.insertAdjacentHTML('beforeend', html);
+                        });
+
+                        // Clear pending additions after injecting them locally
+                        localStorage.setItem('homely_pantry_additions', JSON.stringify([]));
+                    }
+                }
+            })();
+    </script>
+</body>
+
+</html>

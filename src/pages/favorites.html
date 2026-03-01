@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Homely - Favorites &amp; Cookbook</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#D47E30",
+                        "homely-bg": "#FDFBD4",
+                        "homely-text": "#4A3B32",
+                        "homely-secondary": "#825E34",
+                        "homely-card": "#FFFFFF",
+                        "background-light": "#FFFDF5",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2rem",
+                        "2xl": "2.5rem",
+                        "3xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-homely-bg text-homely-text font-display antialiased min-h-screen flex flex-col selection:bg-primary selection:text-white">
+    <header class="sticky top-0 z-20 bg-homely-bg/95 backdrop-blur-sm px-5 pt-8 pb-4 transition-all duration-300">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+                <button
+                    class="w-10 h-10 rounded-full flex items-center justify-center text-homely-secondary hover:bg-homely-secondary/10 transition-colors duration-200 cursor-pointer z-50">
+                    <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+                </button>
+                <div>
+                    <p class="text-sm font-semibold text-homely-secondary/80 mb-1">Welcome back, Chef</p>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-homely-secondary">My Cookbook</h1>
+                </div>
+            </div>
+            <button
+                class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm text-homely-secondary hover:bg-primary hover:text-white transition-colors duration-200">
+                <span class="material-symbols-outlined text-[28px]">add</span>
+            </button>
+        </div>
+        <div class="relative w-full mb-6 group">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <span
+                    class="material-symbols-outlined text-homely-secondary/50 group-focus-within:text-primary transition-colors">search</span>
+            </div>
+            <input
+                class="block w-full pl-12 pr-4 py-4 bg-white border-none rounded-2xl text-homely-text placeholder-homely-secondary/40 shadow-sm focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition-all duration-200 text-base font-medium"
+                placeholder="Search your saved recipes..." type="text" />
+            <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+                <button class="p-1 hover:bg-gray-100 rounded-full transition-colors text-homely-secondary/60">
+                    <span class="material-symbols-outlined">tune</span>
+                </button>
+            </div>
+        </div>
+        <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 mask-linear-fade">
+            <button
+                class="flex-none px-6 py-2.5 rounded-full bg-homely-secondary text-white font-semibold text-sm shadow-md shadow-homely-secondary/20 transition-transform active:scale-95">
+                All Saved
+            </button>
+            <button
+                class="flex-none px-6 py-2.5 rounded-full bg-white text-homely-secondary font-semibold text-sm border border-transparent hover:border-primary/20 hover:text-primary transition-colors active:scale-95 shadow-sm">
+                Dinners
+            </button>
+            <button
+                class="flex-none px-6 py-2.5 rounded-full bg-white text-homely-secondary font-semibold text-sm border border-transparent hover:border-primary/20 hover:text-primary transition-colors active:scale-95 shadow-sm">
+                Breakfast
+            </button>
+            <button
+                class="flex-none px-6 py-2.5 rounded-full bg-white text-homely-secondary font-semibold text-sm border border-transparent hover:border-primary/20 hover:text-primary transition-colors active:scale-95 shadow-sm">
+                Desserts
+            </button>
+            <button
+                class="flex-none px-6 py-2.5 rounded-full bg-white text-homely-secondary font-semibold text-sm border border-transparent hover:border-primary/20 hover:text-primary transition-colors active:scale-95 shadow-sm">
+                Healthy
+            </button>
+        </div>
+    </header>
+    <main class="flex-1 px-4 pb-24 overflow-y-auto">
+        <div id="favorites-grid" class="columns-2 gap-4 space-y-4">
+            <!-- Dynamic favorites will load here. -->
+            <div class="col-span-2 text-center py-12 text-homely-secondary opacity-70 animate-pulse">Loading your
+                cookbook...</div>
+        </div>
+        <div class="flex flex-col items-center justify-center pt-8 pb-4 opacity-50">
+            <span class="material-symbols-outlined text-4xl mb-2 text-homely-secondary">soup_kitchen</span>
+            <p class="text-sm font-semibold text-homely-secondary">You've reached the end of your kitchen!</p>
+        </div>
+    </main>
+    <div id="bottom-nav"></div>
+
+    <script>
+            (async function () {
+                setTimeout(async () => {
+                    const grid = document.getElementById('favorites-grid');
+                    if (!window.homelyAuth || !window.homelyAuth.currentUser) {
+                        grid.innerHTML = '<div class="col-span-2 text-center py-12 text-homely-secondary font-bold">Please log in to see your favorites.</div>';
+                        return;
+                    }
+
+                    if (window.homelyFirestore) {
+                        try {
+                            const { collection, getDocs, deleteDoc, doc } = window.homelyFirestore;
+                            const uid = window.homelyAuth.currentUser.uid;
+                            const querySnapshot = await getDocs(collection(window.homelyDb, 'users', uid, 'favorites'));
+
+                            grid.innerHTML = ''; // clear loading state
+
+                            if (querySnapshot.empty) {
+                                grid.innerHTML = '<div class="col-span-2 text-center py-12 text-homely-secondary opacity-80">Your cookbook is empty. <br> Discover recipes and tap the bookmark to save them here!</div>';
+                                return;
+                            }
+
+                            querySnapshot.forEach((recipeDoc) => {
+                                const data = recipeDoc.data();
+                                const html = `
+                                <div class="break-inside-avoid relative group cursor-pointer nav-btn" data-target="recipe_details.html">
+                                    <div class="relative rounded-3xl overflow-hidden bg-white shadow-sm hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 transform hover:-translate-y-1">
+                                        <img alt="${data.title}" class="w-full h-auto object-cover aspect-[4/5]" src="${data.imageUrl}" />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                        <button class="absolute top-3 right-3 w-9 h-9 bg-primary/90 backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-sm hover:scale-110 transition-all duration-200" onclick="event.stopPropagation(); removeFavorite('${recipeDoc.id}', this)">
+                                            <span class="material-symbols-outlined text-[20px] filled" style="font-variation-settings: 'FILL' 1">bookmark</span>
+                                        </button>
+                                        <div class="absolute bottom-0 left-0 w-full p-4">
+                                            <h3 class="text-white text-lg font-bold leading-tight mb-1.5 font-display tracking-tight">${data.title}</h3>
+                                            <div class="flex items-center text-white/90 text-xs font-semibold bg-white/20 backdrop-blur-md w-fit px-2 py-1 rounded-full">
+                                                <span class="material-symbols-outlined text-[14px] mr-1">schedule</span>
+                                                ${data.time || 'N/A'}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                                grid.insertAdjacentHTML('beforeend', html);
+                            });
+
+                            // Expose remove function
+                            window.removeFavorite = async (id, btnElement) => {
+                                try {
+                                    await deleteDoc(doc(window.homelyDb, 'users', uid, 'favorites', id));
+                                    btnElement.closest('.break-inside-avoid').remove();
+                                    if (grid.children.length === 0) {
+                                        grid.innerHTML = '<div class="col-span-2 text-center py-12 text-homely-secondary opacity-80">Your cookbook is empty now.</div>';
+                                    }
+                                } catch (err) {
+                                    console.error("Error removing:", err);
+                                }
+                            };
+
+                        } catch (err) {
+                            console.error("Error fetching favorites:", err);
+                            grid.innerHTML = '<div class="col-span-2 text-center py-12 text-red-500 font-bold">Failed to load recipes.</div>';
+                        }
+                    }
+                }, 300); // small delay to wait for auth state
+            })();
+    </script>
+</body>
+
+</html>

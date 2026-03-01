@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Homely - Today's Meal Plan</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d57f30", // Turmeric Orange
+                        "primary-dark": "#b06622",
+                        "secondary": "#8D5A2B", // Deep Cooked Brown
+                        "background-light": "#FDFBD4", // Warm Cream requested by user
+                        "background-dark": "#201912",
+                        "surface-light": "#FFFDF5", // Slightly lighter cream for cards
+                        "surface-dark": "#2d241b",
+                        "text-main": "#4a3b32", // Dark warm brown
+                        "text-muted": "#927254", // Lighter warm brown
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2rem",
+                        "2xl": "2.5rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "soft": "0 8px 24px -6px rgba(141, 90, 43, 0.12), 0 4px 8px -4px rgba(141, 90, 43, 0.08)",
+                        "nav": "0 -4px 20px rgba(0,0,0,0.05)"
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar hiding for clean UI */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-slate-100 antialiased min-h-screen flex flex-col selection:bg-primary/30">
+    <!-- Main Content Area -->
+    <main class="flex-1 pb-24 px-4 pt-4 max-w-md mx-auto w-full relative">
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-6 pt-2">
+            <div class="flex flex-col">
+                <span class="text-text-muted dark:text-gray-400 text-sm font-medium tracking-wide uppercase">Today, Oct
+                    24</span>
+                <h1 class="text-text-main dark:text-white text-2xl font-extrabold leading-tight">Good Morning, Chef 👩🍳
+                </h1>
+            </div>
+            <button
+                class="bg-surface-light dark:bg-surface-dark rounded-full p-2 shadow-sm border border-primary/10 hover:bg-primary/10 transition-colors">
+                <span class="material-symbols-outlined text-primary" style="font-size: 28px;">account_circle</span>
+            </button>
+        </header>
+        <!-- Meal Cards Stack -->
+        <div class="space-y-6">
+            <!-- Breakfast Card (Planned) -->
+            <section class="group">
+                <div class="flex items-center justify-between mb-2 px-1">
+                    <h2 class="text-text-main dark:text-gray-200 font-bold text-lg">Breakfast</h2>
+                    <span
+                        class="text-xs font-semibold bg-green-100 text-green-700 px-2 py-1 rounded-full">Completed</span>
+                </div>
+                <div
+                    class="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-soft overflow-hidden p-3 transition-transform active:scale-[0.98] duration-200 border border-transparent dark:border-white/5">
+                    <div class="flex gap-4 items-center">
+                        <div class="relative w-24 h-24 shrink-0">
+                            <img alt="Toast with toppings and chai tea" class="w-full h-full object-cover rounded-xl"
+                                data-alt="Close up of masala chai and toast on a rustic table"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcWDl3KYoLaWsGY0b7DCUfNadB4G6onnBkeYfFqVFFlU7k-0zlujWXQ8tyDgnQO2sc8SKE-B3at4TnVXc3C3EpA6o_IFw9YfIdTd98Wb44fUo59l3pPl7M8Z6lDlcvW375KBOgsJZacyTeOpCN5dQHxyKmO4fNfk5GCLyGY6i4xYgVMDoerK-XgbEBu0GMHHH4WsNoh0QlAq-3LuiYA2ZnegJh2h9YbhLt7v2A_UJTOFvcVzIk2zM5AoCkelX8G_iMKsRQWJSHSh8" />
+                            <div class="absolute inset-0 bg-black/10 rounded-xl"></div>
+                        </div>
+                        <div class="flex flex-col flex-1 py-1">
+                            <h3 class="text-lg font-bold text-text-main dark:text-white leading-tight mb-1">Masala Chai
+                                &amp; Toast</h3>
+                            <div class="flex items-center text-text-muted dark:text-gray-400 text-xs mb-3 font-medium">
+                                <span class="material-symbols-outlined mr-1" style="font-size: 16px;">schedule</span>
+                                15 mins
+                                <span class="mx-2">•</span>
+                                <span class="material-symbols-outlined mr-1 text-primary"
+                                    style="font-size: 16px;">local_fire_department</span>
+                                240 Kcal
+                            </div>
+                            <button
+                                class="self-start text-xs font-bold text-primary hover:text-primary-dark flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                View Recipe <span class="material-symbols-outlined"
+                                    style="font-size: 16px;">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Lunch Card (Unplanned) -->
+            <section>
+                <div class="flex items-center justify-between mb-2 px-1">
+                    <h2 class="text-text-main dark:text-gray-200 font-bold text-lg">Lunch</h2>
+                </div>
+                <div
+                    class="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-soft border-2 border-dashed border-primary/20 p-6 flex flex-col items-center justify-center text-center gap-4 relative overflow-hidden group">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-full p-3 shadow-sm z-10">
+                        <span class="material-symbols-outlined text-primary/60"
+                            style="font-size: 32px;">soup_kitchen</span>
+                    </div>
+                    <div class="z-10">
+                        <h3 class="text-text-main dark:text-white font-bold text-lg">Lunch is not planned yet</h3>
+                        <p class="text-text-muted dark:text-gray-400 text-sm mt-1">What are you craving today?</p>
+                    </div>
+                    <button
+                        class="bg-primary hover:bg-primary-dark text-white text-sm font-bold py-3 px-6 rounded-full shadow-lg shadow-primary/20 transition-all active:scale-95 z-10 flex items-center gap-2"
+                        data-target="ai_assistant.html">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">auto_awesome</span>
+                        Suggest Meal
+                    </button>
+                </div>
+            </section>
+            <!-- Dinner Card (Planned) -->
+            <section>
+                <div class="flex items-center justify-between mb-2 px-1">
+                    <h2 class="text-text-main dark:text-gray-200 font-bold text-lg">Dinner</h2>
+                    <span
+                        class="text-xs font-semibold bg-orange-100 text-orange-700 px-2 py-1 rounded-full">Upcoming</span>
+                </div>
+                <a href="?page=recipe_details.html" class="block">
+                    <div
+                        class="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-soft overflow-hidden relative group">
+                        <!-- Card Background Image -->
+                        <div class="h-48 w-full relative">
+                            <img alt="Bowl of rich orange paneer butter masala curry" class="w-full h-full object-cover"
+                                data-alt="Rich paneer butter masala in a traditional copper bowl"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD7JK-77wqedZe5luyYoOER0yoSa5vkScoAV2n5UfGRVZ7Xg-JiBjJ46iaNNY9yaOsF_Kv9xNVPjiv2C9_dGjLLOg0uXjB5D_kAR6FiGbuqPCXZ6tt3vCxz8xLTOS2NRbuoIl79v81Y9WDgAuBHU6aeC9f1v6UjJJoMHcYdzSFy3Ox7z_wgR_aaDeBoN_BwP417weBGMLTAVn7y0tk40Cdaxj3esPexEGVWVTUGlxMBn7mBCihZkclcKMe4i_tZ6fhjJRDz_GtVXA" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <!-- Floating Like Button -->
+                            <button
+                                class="absolute top-3 right-3 bg-white/20 backdrop-blur-md hover:bg-white/40 text-white rounded-full p-2 transition-colors">
+                                <span class="material-symbols-outlined" style="font-size: 20px;">favorite</span>
+                            </button>
+                        </div>
+                        <!-- Content Overlay -->
+                        <div class="p-4 absolute bottom-0 w-full text-white">
+                            <div class="flex gap-2 mb-2">
+                                <span
+                                    class="text-[10px] font-bold bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded-full border border-white/10">Vegetarian</span>
+                                <span
+                                    class="text-[10px] font-bold bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded-full border border-white/10">Spicy</span>
+                            </div>
+                            <h3 class="text-xl font-bold leading-tight mb-1">Paneer Butter Masala</h3>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-gray-200 text-xs font-medium">
+                                    <span class="material-symbols-outlined mr-1"
+                                        style="font-size: 16px;">schedule</span>
+                                    45 mins
+                                </div>
+                                <button
+                                    class="bg-white text-primary text-xs font-bold py-1.5 px-3 rounded-full flex items-center gap-1 shadow-sm">
+                                    View
+                                    <span class="material-symbols-outlined"
+                                        style="font-size: 14px;">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </section>
+            <!-- Spacer for scroll -->
+            <div class="h-20"></div>
+        </div>
+    </main>
+    <!-- Floating Action Button (Active Cooking) -->
+    <a href="?page=guided_cook_mode.html" class="block">
+        <div class="fixed bottom-24 right-4 z-40 md:right-[calc(50%-220px+1rem)]">
+            <button
+                class="bg-secondary hover:bg-[#6e4622] text-white rounded-full pl-5 pr-6 py-3 shadow-xl shadow-secondary/30 flex items-center gap-3 transition-transform hover:scale-105 active:scale-95">
+                <div class="bg-white/20 rounded-full p-1">
+                    <span class="material-symbols-outlined animate-pulse" style="font-size: 20px;">soup_kitchen</span>
+                </div>
+                <div class="text-left">
+                    <p class="text-[10px] uppercase tracking-wider font-semibold opacity-80 leading-none mb-0.5">Cooking
+                        Now</p>
+                    <p class="text-sm font-bold leading-none">Continue Cooking</p>
+                </div>
+            </button>
+        </div>
+    </a>
+    <!-- Bottom Navigation Bar wrapper placeholder -->
+    <div id="bottom-nav"></div>
+</body>
+
+</html>

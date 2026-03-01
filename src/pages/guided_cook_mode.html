@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Homely - Guided Cook Mode</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Theme Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d57f30",
+                        "deep-brown": "#8D5A2B",
+                        "warm-bg": "#FDFBD4",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#201912",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-warm-bg dark:bg-background-dark min-h-screen flex flex-col font-display overflow-hidden antialiased">
+    <!-- Main Container -->
+    <main
+        class="flex-1 flex flex-col relative h-full max-w-md mx-auto w-full shadow-2xl bg-warm-bg dark:bg-background-dark">
+        <!-- Top App Bar -->
+        <header class="flex items-center justify-between p-6 z-10">
+            <!-- Close Button -->
+            <button
+                class="flex items-center justify-center w-12 h-12 rounded-full bg-deep-brown/10 dark:bg-white/10 text-deep-brown dark:text-primary hover:bg-deep-brown/20 transition-colors"
+                data-target="recipe_details.html">
+                <span class="material-symbols-outlined text-2xl">arrow_back</span>
+            </button>
+            <!-- Timer Button -->
+            <button
+                class="flex items-center gap-2 h-12 px-5 rounded-full bg-deep-brown/10 dark:bg-white/10 text-deep-brown dark:text-primary font-bold hover:bg-deep-brown/20 transition-colors">
+                <span class="material-symbols-outlined text-2xl">timer</span>
+                <span>15:00</span>
+            </button>
+        </header>
+        <!-- Progress Section -->
+        <div class="px-6 pb-2">
+            <div class="flex justify-between items-end mb-3">
+                <span id="header-step-text"
+                    class="text-deep-brown/70 dark:text-primary/70 font-semibold text-sm uppercase tracking-wider">Step
+                    1 of 4</span>
+                <span id="progress-text" class="text-deep-brown/50 dark:text-primary/50 font-medium text-xs">25%
+                    Complete</span>
+            </div>
+            <!-- Progress Bar Track -->
+            <div class="h-3 w-full bg-deep-brown/10 dark:bg-white/10 rounded-full overflow-hidden">
+                <!-- Progress Fill -->
+                <div id="progress-bar" class="h-full bg-primary rounded-full transition-all duration-500 ease-out"
+                    style="width: 25%;">
+                </div>
+            </div>
+        </div>
+        <!-- Main Content Area: Centered Card -->
+        <div class="flex-1 flex flex-col justify-center px-6 py-4 overflow-y-auto">
+            <!-- Step Card -->
+            <div
+                class="bg-white dark:bg-[#2A2218] rounded-xl p-8 shadow-sm border border-deep-brown/5 dark:border-white/5 relative overflow-hidden">
+                <!-- Background Decoration (Subtle) -->
+                <div
+                    class="absolute -right-10 -top-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none">
+                </div>
+                <!-- Step Number Badge -->
+                <div id="step-text"
+                    class="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-sm mb-6 transition-all">
+                    Step 01
+                </div>
+                <!-- Main Instruction -->
+                <h1 id="step-instruction"
+                    class="text-4xl md:text-[40px] font-extrabold text-slate-900 dark:text-slate-100 leading-[1.1] tracking-tight mb-8 transition-all">
+                    Instruction text here
+                </h1>
+                <!-- Ingredient Context -->
+                <div class="space-y-4 transition-all">
+                    <p class="text-sm font-bold text-deep-brown/60 dark:text-primary/60 uppercase tracking-widest">You
+                        will need</p>
+                    <div id="step-ingredients" class="grid grid-cols-1 gap-3">
+                        <!-- Dynamic ingredients appended here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Tip/Note (Optional) -->
+            <div id="step-tip-container" class="mt-6 flex gap-3 px-2 opacity-80 transition-all">
+                <span
+                    class="material-symbols-outlined text-deep-brown dark:text-primary text-xl shrink-0 mt-0.5">lightbulb</span>
+                <p id="step-tip" class="text-deep-brown/80 dark:text-slate-300 text-sm font-medium leading-relaxed">
+                    Tip text here.
+                </p>
+            </div>
+        </div>
+        <!-- Bottom Actions -->
+        <div class="p-6 pb-8 bg-warm-bg dark:bg-background-dark z-10 flex flex-col gap-4">
+            <!-- Primary Action -->
+            <button id="next-step-btn"
+                class="w-full h-16 bg-deep-brown hover:bg-[#724822] active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-3 shadow-lg shadow-deep-brown/20 group">
+                <span id="next-btn-text"
+                    class="text-[#FDFBD4] text-xl font-bold tracking-wide group-hover:translate-x-1 transition-transform">Next
+                    Step</span>
+                <span
+                    class="material-symbols-outlined text-[#FDFBD4] text-2xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </button>
+            <!-- Secondary Action -->
+            <button id="prev-step-btn"
+                class="w-full py-3 flex items-center justify-center text-deep-brown dark:text-primary/80 hover:text-primary font-bold text-base transition-colors opacity-50 pointer-events-none">
+                <span class="material-symbols-outlined text-lg mr-2">arrow_back</span>
+                Previous Step
+            </button>
+        </div>
+    </main>
+
+    <script>
+            (function () {
+                // Mock Recipe Default
+                let recipeSteps = [
+                    {
+                        instruction: "Heat oil in a large pan over medium heat.",
+                        ingredients: [{ qty: "2 tbsp", name: "Olive oil" }],
+                        tip: "Make sure the pan is evenly coated."
+                    },
+                    {
+                        instruction: "Add the diced onions and sauté until golden brown.",
+                        ingredients: [
+                            { qty: "1 medium", name: "Onion, diced" },
+                            { qty: "2 tsp", name: "Cumin seeds, whole" }
+                        ],
+                        tip: "Keep stirring occasionally to prevent the cumin seeds from burning while the onions caramelize."
+                    },
+                    {
+                        instruction: "Stir in the tomato paste, spices, and simmer for 15 minutes.",
+                        ingredients: [{ qty: "2 tbsp", name: "Tomato paste" }],
+                        tip: "Lower the heat if it splatters."
+                    },
+                    {
+                        instruction: "Add paneer cubes and heavy cream. Cook for 5 more minutes.",
+                        ingredients: [
+                            { qty: "200g", name: "Paneer cubes" },
+                            { qty: "1/4 cup", name: "Heavy cream" }
+                        ],
+                        tip: "Do not let the cream boil rapidly, or it might split."
+                    }
+                ];
+
+                // AI Integration: Attempt to read dynamic steps from localStorage
+                try {
+                    const aiRecipeStr = localStorage.getItem('current_guided_recipe');
+                    if (aiRecipeStr) {
+                        const aiRecipe = JSON.parse(aiRecipeStr);
+                        if (aiRecipe && aiRecipe.steps && aiRecipe.steps.length > 0) {
+                            recipeSteps = aiRecipe.steps;
+                        }
+                    }
+                } catch (e) { }
+
+                let currentStepIdx = 0;
+                const totalSteps = recipeSteps.length;
+
+                const stepTextEl = document.getElementById('step-text');
+                const stepInstructionEl = document.getElementById('step-instruction');
+                const stepIngredientsEl = document.getElementById('step-ingredients');
+                const stepTipEl = document.getElementById('step-tip');
+                const stepTipContainer = document.getElementById('step-tip-container');
+                const progressBar = document.getElementById('progress-bar');
+                const progressText = document.getElementById('progress-text');
+
+                const nextBtn = document.getElementById('next-step-btn');
+                const nextBtnText = document.getElementById('next-btn-text');
+                const prevBtn = document.getElementById('prev-step-btn');
+
+                function renderStep() {
+                    const step = recipeSteps[currentStepIdx];
+                    const stepNum = currentStepIdx + 1;
+
+                    stepTextEl.textContent = 'Step ' + String(stepNum).padStart(2, '0');
+                    document.getElementById('header-step-text').textContent = 'Step ' + stepNum + ' of ' + totalSteps;
+
+                    const progressPct = Math.round((stepNum / totalSteps) * 100);
+                    progressBar.style.width = progressPct + '%';
+                    progressText.textContent = progressPct + '% Complete';
+
+                    stepInstructionEl.textContent = step.instruction;
+
+                    // Render Ingredients
+                    if (step.ingredients && step.ingredients.length > 0) {
+                        let igHtml = '';
+                        step.ingredients.forEach((ig, idx) => {
+                            const icon = idx % 2 === 0 ? 'grocery' : 'spa'; // alternate icons roughly
+                            igHtml += '<div class="flex items-center gap-4 p-3 rounded-lg bg-warm-bg dark:bg-white/5 border border-deep-brown/5 dark:border-white/5 transition-all">';
+                            igHtml += '<div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-primary/20 flex items-center justify-center text-primary shrink-0"><span class="material-symbols-outlined text-xl">' + icon + '</span></div>';
+                            igHtml += '<div class="flex flex-col"><span class="text-slate-900 dark:text-slate-100 font-bold text-lg leading-tight">' + ig.qty + '</span><span class="text-deep-brown dark:text-primary/80 text-sm">' + ig.name + '</span></div>';
+                            igHtml += '</div>';
+                        });
+                        stepIngredientsEl.innerHTML = igHtml;
+                        stepIngredientsEl.parentElement.style.display = 'block';
+                    } else {
+                        stepIngredientsEl.innerHTML = '';
+                        stepIngredientsEl.parentElement.style.display = 'none';
+                    }
+
+                    if (step.tip) {
+                        stepTipEl.textContent = step.tip;
+                        stepTipContainer.style.display = 'flex';
+                    } else {
+                        stepTipContainer.style.display = 'none';
+                    }
+
+                    // Button states
+                    if (currentStepIdx >= totalSteps - 1) {
+                        nextBtnText.textContent = 'Finish Cooking';
+                        // We let script handle it, do not use global router hijack nav-btn class here
+                    } else {
+                        nextBtnText.textContent = 'Next Step';
+                    }
+
+                    if (currentStepIdx === 0) {
+                        prevBtn.classList.add('opacity-50', 'pointer-events-none');
+                    } else {
+                        prevBtn.classList.remove('opacity-50', 'pointer-events-none');
+                    }
+                }
+
+                nextBtn.addEventListener('click', (e) => {
+                    if (currentStepIdx < totalSteps - 1) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        currentStepIdx++;
+                        renderStep();
+                    } else {
+                        if (window.navigate) {
+                            window.navigate('meal_success.html');
+                        } else {
+                            window.location.href = '/?page=meal_success.html';
+                        }
+                    }
+                });
+
+                prevBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (currentStepIdx > 0) {
+                        currentStepIdx--;
+                        renderStep();
+                    }
+                });
+
+                // Initial render
+                renderStep();
+            })();
+    </script>
+</body>
+
+</html>
